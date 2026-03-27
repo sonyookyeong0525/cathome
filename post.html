@@ -115,6 +115,10 @@
 
         <!-- 본문 (JS로 표시) -->
         <div class="post-detail__body" id="postBody" style="display:none">
+          <!-- 첨부 이미지 (있을 때만 표시) -->
+          <div class="post-detail__image" id="postImageWrap" style="display:none">
+            <img id="postImage" src="" alt="첨부 이미지">
+          </div>
           <div class="post-detail__content" id="postContent"></div>
         </div>
 
@@ -130,6 +134,39 @@
       <div class="post-detail__back">
         <a href="board.html" class="btn btn--outline">목록으로</a>
       </div>
+
+      <!-- 댓글 섹션 -->
+      <section class="comment-section" id="commentSection">
+
+        <h2 class="comment-section__title">
+          댓글 <span id="commentCount">0</span>개
+        </h2>
+
+        <!-- 댓글 목록 -->
+        <ul class="comment-list" id="commentList">
+          <li class="comment-empty" id="commentEmpty">첫 번째 댓글을 남겨보세요.</li>
+        </ul>
+
+        <!-- 댓글 작성 폼 (로그인 시 표시) -->
+        <div class="comment-form" id="commentForm" style="display:none">
+          <textarea
+            id="commentContent"
+            class="comment-form__textarea"
+            placeholder="댓글을 입력하세요."
+            maxlength="500"
+          ></textarea>
+          <div class="comment-form__actions">
+            <span class="comment-form__limit" id="commentLimit">0 / 500</span>
+            <button class="btn btn--primary" id="commentSubmitBtn">등록</button>
+          </div>
+        </div>
+
+        <!-- 비로그인 안내 -->
+        <div class="comment-login-notice" id="commentLoginNotice" style="display:none">
+          <a href="login.html">로그인</a> 후 댓글을 작성할 수 있습니다.
+        </div>
+
+      </section>
 
     </div>
   </main>

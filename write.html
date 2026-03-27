@@ -127,6 +127,30 @@
           ></textarea>
         </div>
 
+        <!-- 이미지 첨부 -->
+        <div class="write-form__row">
+          <label class="write-form__label">이미지 첨부</label>
+          <div class="write-form__upload">
+            <!-- 실제 파일 input은 숨김 처리 -->
+            <input type="file" id="imageFile" class="write-form__file-input" accept="image/jpeg,image/png,image/gif,image/webp">
+            <label for="imageFile" class="write-form__file-btn btn btn--outline">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                <polyline points="17 8 12 3 7 8"/>
+                <line x1="12" y1="3" x2="12" y2="15"/>
+              </svg>
+              파일 선택
+            </label>
+            <span class="write-form__file-name" id="fileName">선택된 파일 없음</span>
+            <button type="button" class="write-form__file-clear" id="fileClearBtn" style="display:none" aria-label="첨부 취소">✕</button>
+          </div>
+          <p class="write-form__file-guide">이미지 파일만 첨부 가능합니다. (jpg, png, gif, webp / 최대 5MB)</p>
+          <!-- 미리보기 -->
+          <div class="write-form__preview" id="imagePreview" style="display:none">
+            <img id="previewImg" src="" alt="첨부 이미지 미리보기">
+          </div>
+        </div>
+
         <!-- 버튼 -->
         <div class="write-form__actions">
           <button type="button" class="btn btn--outline" id="cancelBtn">취소</button>

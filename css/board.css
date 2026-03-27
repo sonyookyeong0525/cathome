@@ -310,6 +310,78 @@
   border-top: 1px solid var(--gray-200);
 }
 
+/* 파일 첨부 영역 */
+.write-form__file-input {
+  display: none; /* 기본 input 숨김 — label로 트리거 */
+}
+
+.write-form__upload {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.write-form__file-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 40px;
+  padding: 0 var(--spacing-md);
+  font-size: 14px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.write-form__file-name {
+  font-size: 14px;
+  color: var(--gray-600);
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.write-form__file-clear {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: var(--radius-full);
+  background-color: var(--gray-400);
+  color: #ffffff;
+  font-size: 12px;
+  cursor: pointer;
+  border: none;
+  flex-shrink: 0;
+  transition: background-color 0.2s;
+}
+
+.write-form__file-clear:hover {
+  background-color: var(--gray-600);
+}
+
+.write-form__file-guide {
+  font-size: 12px;
+  color: var(--gray-400);
+  margin-top: var(--spacing-xs);
+}
+
+/* 이미지 미리보기 */
+.write-form__preview {
+  margin-top: var(--spacing-md);
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  max-width: 480px;
+}
+
+.write-form__preview img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
 /* =====================
    게시글 상세보기
    ===================== */
@@ -389,9 +461,160 @@
   color: #ffffff;
 }
 
+/* 첨부 이미지 */
+.post-detail__image {
+  margin-bottom: var(--spacing-xl);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  max-width: 720px;
+}
+
+.post-detail__image img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
 /* 목록으로 버튼 */
 .post-detail__back {
   display: flex;
   justify-content: center;
-  padding: var(--spacing-xl) 0 var(--spacing-2xl);
+  padding: var(--spacing-xl) 0;
+}
+
+/* =====================
+   댓글 섹션
+   ===================== */
+
+.comment-section {
+  margin-top: var(--spacing-2xl);
+  padding-bottom: var(--spacing-2xl);
+}
+
+.comment-section__title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--gray-900);
+  padding-bottom: var(--spacing-md);
+  border-bottom: 2px solid var(--gray-900);
+  margin-bottom: var(--spacing-lg);
+}
+
+.comment-section__title span {
+  color: var(--color-primary);
+}
+
+/* 댓글 목록 */
+.comment-list {
+  list-style: none;
+  margin-bottom: var(--spacing-xl);
+}
+
+.comment-empty {
+  padding: var(--spacing-xl) 0;
+  text-align: center;
+  font-size: 14px;
+  color: var(--gray-400);
+}
+
+/* 댓글 아이템 */
+.comment-item {
+  padding: var(--spacing-lg) 0;
+  border-bottom: 1px solid var(--gray-200);
+}
+
+.comment-item__meta {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-sm);
+}
+
+.comment-item__author {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--gray-800);
+}
+
+.comment-item__date {
+  font-size: 13px;
+  color: var(--gray-400);
+}
+
+.comment-item__delete {
+  margin-left: auto;
+  font-size: 13px;
+  color: var(--gray-400);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: color 0.2s;
+}
+
+.comment-item__delete:hover {
+  color: #e53935;
+}
+
+.comment-item__content {
+  font-size: 15px;
+  color: var(--gray-700);
+  line-height: 1.7;
+  word-break: break-word;
+}
+
+/* 댓글 작성 폼 */
+.comment-form {
+  background-color: var(--gray-50);
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-lg);
+}
+
+.comment-form__textarea {
+  width: 100%;
+  height: 100px;
+  padding: var(--spacing-md);
+  border: 1px solid var(--gray-300);
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  font-family: var(--font-base);
+  color: var(--gray-800);
+  resize: none;
+  transition: border-color 0.2s;
+  box-sizing: border-box;
+}
+
+.comment-form__textarea:focus {
+  outline: none;
+  border-color: var(--color-primary);
+}
+
+.comment-form__actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-sm);
+}
+
+.comment-form__limit {
+  font-size: 13px;
+  color: var(--gray-400);
+}
+
+/* 비로그인 안내 */
+.comment-login-notice {
+  padding: var(--spacing-lg);
+  text-align: center;
+  font-size: 14px;
+  color: var(--gray-500);
+  background-color: var(--gray-50);
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-md);
+}
+
+.comment-login-notice a {
+  color: var(--color-primary);
+  font-weight: 600;
 }
