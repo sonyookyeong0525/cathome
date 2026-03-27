@@ -183,6 +183,14 @@
   color: var(--color-primary);
 }
 
+/* 첨부 아이콘 */
+.board-table__attach-icon {
+  margin-left: 6px;
+  vertical-align: middle;
+  color: var(--gray-400);
+  flex-shrink: 0;
+}
+
 /* 조회수 */
 .board-table__views-wrap {
   display: inline-flex;

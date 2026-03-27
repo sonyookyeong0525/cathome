@@ -24,14 +24,21 @@ const EYE_ICON = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" st
   <circle cx="12" cy="12" r="3"/>
 </svg>`
 
+/* 첨부 아이콘 SVG */
+const ATTACH_ICON = `<svg class="board-table__attach-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" title="이미지 첨부">
+  <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/>
+</svg>`
+
 /* 게시글 행 HTML 생성 */
 const createRowHTML = (post) => {
+  const attachIcon = post.image_url ? ATTACH_ICON : ''
+
   if (post.is_notice) {
     return `
       <tr class="board-table__row board-table__row--notice">
         <td><span class="badge badge--primary">공지</span></td>
         <td class="board-table__title-cell">
-          <a href="post.html?id=${post.id}">${post.title}</a>
+          <a href="post.html?id=${post.id}">${post.title}</a>${attachIcon}
         </td>
         <td>${post.author_name}</td>
         <td>${formatDate(post.created_at)}</td>
@@ -42,7 +49,7 @@ const createRowHTML = (post) => {
     <tr class="board-table__row">
       <td>${post.id}</td>
       <td class="board-table__title-cell">
-        <a href="post.html?id=${post.id}">${post.title}</a>
+        <a href="post.html?id=${post.id}">${post.title}</a>${attachIcon}
       </td>
       <td>${post.author_name}</td>
       <td>${formatDate(post.created_at)}</td>
