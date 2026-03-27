@@ -159,11 +159,8 @@ const init = async () => {
     return
   }
 
-  /* 조회수 +1 업데이트 */
-  await supabase
-    .from('posts')
-    .update({ views: post.views + 1 })
-    .eq('id', postId)
+  /* 조회수 +1 — security definer 함수로 RLS 우회 */
+  await supabase.rpc('increment_views', { post_id: parseInt(postId) })
 
   /* 로딩 텍스트 숨김 */
   document.querySelector('#postLoading').style.display = 'none'
