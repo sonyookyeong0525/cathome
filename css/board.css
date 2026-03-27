@@ -183,6 +183,14 @@
   color: var(--color-primary);
 }
 
+/* 댓글 수 */
+.board-table__comment-count {
+  margin-left: 5px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
 /* 첨부 아이콘 */
 .board-table__attach-icon {
   margin-left: 6px;
