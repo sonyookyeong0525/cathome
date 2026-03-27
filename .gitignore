@@ -1,0 +1,18 @@
+# 환경변수
+.env
+.env.local
+.env.*.local
+
+# 참고 자료 (커밋 제외)
+ref/
+
+# 메모리 (커밋 제외)
+memory/
+
+# OS 파일
+.DS_Store
+Thumbs.db
+
+# 에디터
+.vscode/
+.idea/
