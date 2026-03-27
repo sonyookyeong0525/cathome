@@ -6,6 +6,8 @@
   <title>글쓰기 — CATHOME</title>
   <!-- Pretendard 폰트 -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+  <!-- Quill 에디터 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/quill@2/dist/quill.snow.css">
   <!-- CSS -->
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/variables.css">
@@ -116,15 +118,12 @@
           >
         </div>
 
-        <!-- 내용 -->
+        <!-- 내용 (Quill 에디터) -->
         <div class="write-form__row">
-          <label class="write-form__label" for="postContent">내용</label>
-          <textarea
-            id="postContent"
-            class="write-form__textarea"
-            placeholder="내용을 입력하세요."
-            required
-          ></textarea>
+          <label class="write-form__label">내용</label>
+          <div class="write-form__editor-wrap">
+            <div id="quillEditor"></div>
+          </div>
         </div>
 
         <!-- 이미지 첨부 -->
@@ -205,6 +204,7 @@
     </div>
   </footer>
 
+  <script src="https://cdn.jsdelivr.net/npm/quill@2/dist/quill.js"></script>
   <script type="module" src="js/write.js"></script>
   <script type="module" src="js/auth.js"></script>
 </body>

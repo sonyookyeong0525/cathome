@@ -175,11 +175,8 @@ const init = async () => {
   document.querySelector('#postAuthor').textContent = post.author_name
   document.querySelector('#postDate').textContent = formatDate(post.created_at)
   document.querySelector('#postViews').textContent = post.views + 1
+  /* Quill이 생성한 HTML을 그대로 렌더링 */
   document.querySelector('#postContent').innerHTML = post.content
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/\n/g, '<br>')
 
   /* 첨부 이미지가 있으면 표시 */
   if (post.image_url) {

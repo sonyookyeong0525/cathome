@@ -1,5 +1,5 @@
 /* =====================
-   글쓰기 / 글 수정
+   글쓰기 / 글 수정 (Quill 에디터)
    ===================== */
 
 import { supabase } from './supabase.js'
@@ -17,7 +17,27 @@ const MAX_SIZE = 5 * 1024 * 1024 // 5MB
 
 /* 선택된 파일 상태 */
 let selectedFile = null
-let existingImageUrl = null  // 수정 시 기존 이미지 URL
+let existingImageUrl = null
+
+/* ── Quill 에디터 초기화 ── */
+const initEditor = () => {
+  const quill = new Quill('#quillEditor', {
+    theme: 'snow',
+    placeholder: '내용을 입력하세요.',
+    modules: {
+      toolbar: [
+        [{ header: [1, 2, 3, false] }],
+        [{ size: ['small', false, 'large', 'huge'] }],
+        ['bold', 'italic', 'underline', 'strike'],
+        [{ color: [] }, { background: [] }],
+        [{ list: 'ordered' }, { list: 'bullet' }],
+        [{ align: [] }],
+        ['clean'],
+      ],
+    },
+  })
+  return quill
+}
 
 /* ── 이미지 첨부 UI ── */
 const initImageUpload = () => {
@@ -27,19 +47,15 @@ const initImageUpload = () => {
   const imagePreview = document.querySelector('#imagePreview')
   const previewImg = document.querySelector('#previewImg')
 
-  /* 파일 선택 시 */
   fileInput.addEventListener('change', () => {
     const file = fileInput.files[0]
     if (!file) return
 
-    /* 타입 검사 */
     if (!ALLOWED_TYPES.includes(file.type)) {
       alert('이미지 파일(jpg, png, gif, webp)만 첨부할 수 있습니다.')
       fileInput.value = ''
       return
     }
-
-    /* 용량 검사 */
     if (file.size > MAX_SIZE) {
       alert('파일 크기는 5MB 이하만 첨부할 수 있습니다.')
       fileInput.value = ''
@@ -47,12 +63,11 @@ const initImageUpload = () => {
     }
 
     selectedFile = file
-    existingImageUrl = null  // 새 파일 선택 시 기존 이미지 대체
+    existingImageUrl = null
 
     fileName.textContent = file.name
     fileClearBtn.style.display = 'inline-flex'
 
-    /* 미리보기 */
     const reader = new FileReader()
     reader.onload = (e) => {
       previewImg.src = e.target.result
@@ -61,7 +76,6 @@ const initImageUpload = () => {
     reader.readAsDataURL(file)
   })
 
-  /* 첨부 취소 버튼 */
   fileClearBtn.addEventListener('click', () => {
     selectedFile = null
     existingImageUrl = null
@@ -73,9 +87,8 @@ const initImageUpload = () => {
   })
 }
 
-/* ── Supabase Storage에 이미지 업로드 후 공개 URL 반환 ── */
+/* ── Storage 이미지 업로드 ── */
 const uploadImage = async (file, userId) => {
-  /* 파일명 중복 방지: userId/타임스탬프_원본파일명 */
   const ext = file.name.split('.').pop()
   const filePath = `${userId}/${Date.now()}.${ext}`
 
@@ -88,7 +101,6 @@ const uploadImage = async (file, userId) => {
     return null
   }
 
-  /* 공개 URL 조회 */
   const { data } = supabase.storage
     .from('post-images')
     .getPublicUrl(filePath)
@@ -106,6 +118,7 @@ const init = async () => {
     return
   }
 
+  const quill = initEditor()
   initImageUpload()
 
   /* 수정 모드: 기존 내용 불러오기 */
@@ -126,7 +139,6 @@ const init = async () => {
       return
     }
 
-    /* 본인 글인지 확인 */
     if (data.user_id !== session.user.id) {
       alert('수정 권한이 없습니다.')
       window.location.href = `post.html?id=${editId}`
@@ -134,9 +146,10 @@ const init = async () => {
     }
 
     document.querySelector('#postTitle').value = data.title
-    document.querySelector('#postContent').value = data.content
 
-    /* 기존 이미지가 있으면 미리보기로 표시 */
+    /* 기존 HTML 내용을 Quill에 로드 */
+    quill.clipboard.dangerouslyPasteHTML(data.content)
+
     if (data.image_url) {
       existingImageUrl = data.image_url
       document.querySelector('#fileName').textContent = '기존 이미지 첨부됨'
@@ -156,17 +169,18 @@ const init = async () => {
     e.preventDefault()
 
     const title = document.querySelector('#postTitle').value.trim()
-    const content = document.querySelector('#postContent').value.trim()
+    /* Quill 내용이 비어있으면 getText()가 '\n'만 반환 */
+    const content = quill.getSemanticHTML()
+    const isContentEmpty = quill.getText().trim() === ''
 
     if (!title) { alert('제목을 입력하세요.'); return }
-    if (!content) { alert('내용을 입력하세요.'); return }
+    if (isContentEmpty) { alert('내용을 입력하세요.'); return }
 
     const submitBtn = document.querySelector('#submitBtn')
     submitBtn.disabled = true
     submitBtn.textContent = '처리 중...'
 
-    /* 이미지 업로드 처리 */
-    let imageUrl = existingImageUrl  // 기존 이미지 유지 또는 null
+    let imageUrl = existingImageUrl
 
     if (selectedFile) {
       submitBtn.textContent = '이미지 업로드 중...'
@@ -180,7 +194,6 @@ const init = async () => {
     }
 
     if (editId) {
-      /* 수정 */
       const { error } = await supabase
         .from('posts')
         .update({ title, content, image_url: imageUrl })
@@ -193,10 +206,8 @@ const init = async () => {
         submitBtn.textContent = '수정'
         return
       }
-      window.location.href = 'board.html'
 
     } else {
-      /* 새 글 등록 */
       const { error } = await supabase
         .from('posts')
         .insert({
@@ -213,8 +224,9 @@ const init = async () => {
         submitBtn.textContent = '등록'
         return
       }
-      window.location.href = 'board.html'
     }
+
+    window.location.href = 'board.html'
   })
 }
 

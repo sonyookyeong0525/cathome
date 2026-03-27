@@ -326,6 +326,39 @@
   border-top: 1px solid var(--gray-200);
 }
 
+/* Quill 에디터 래퍼 */
+.write-form__editor-wrap {
+  border: 1px solid var(--gray-300);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+/* Quill 툴바 커스텀 */
+.write-form__editor-wrap .ql-toolbar {
+  border: none;
+  border-bottom: 1px solid var(--gray-300);
+  background-color: var(--gray-50);
+  font-family: var(--font-base);
+}
+
+.write-form__editor-wrap .ql-container {
+  border: none;
+  font-family: var(--font-base);
+  font-size: 15px;
+  min-height: 360px;
+}
+
+.write-form__editor-wrap .ql-editor {
+  min-height: 360px;
+  line-height: 1.8;
+  color: var(--gray-800);
+}
+
+.write-form__editor-wrap .ql-editor.ql-blank::before {
+  color: var(--gray-400);
+  font-style: normal;
+}
+
 /* 파일 첨부 영역 */
 .write-form__file-input {
   display: none; /* 기본 input 숨김 — label로 트리거 */
@@ -441,6 +474,15 @@
   display: inline-flex;
   align-items: center;
   gap: 4px;
+}
+
+/* 상세페이지 본문 — Quill ql-editor 기본 padding 제거 */
+.post-detail__content.ql-editor {
+  padding: 0;
+  min-height: unset;
+  font-size: 16px;
+  color: var(--gray-800);
+  line-height: 1.8;
 }
 
 /* 본문 */

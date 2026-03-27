@@ -6,6 +6,8 @@
   <title>게시글 상세 — CATHOME</title>
   <!-- Pretendard 폰트 -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+  <!-- Quill 본문 렌더링 스타일 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/quill@2/dist/quill.snow.css">
   <!-- CSS -->
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/variables.css">
@@ -119,7 +121,7 @@
           <div class="post-detail__image" id="postImageWrap" style="display:none">
             <img id="postImage" src="" alt="첨부 이미지">
           </div>
-          <div class="post-detail__content" id="postContent"></div>
+          <div class="post-detail__content ql-editor" id="postContent"></div>
         </div>
 
         <!-- 수정/삭제 버튼 (본인 글만 표시) -->
