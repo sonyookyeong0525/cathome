@@ -1,0 +1,22 @@
+/* =====================
+   기본 스타일 설정
+   ===================== */
+
+body {
+  font-family: var(--font-base);
+  font-size: var(--font-size-body);
+  color: var(--color-text);
+  background-color: #ffffff;
+}
+
+/* 제목 타이포그래피 */
+h1 { font-size: var(--font-size-h1); font-weight: 700; }
+h2 { font-size: var(--font-size-h2); font-weight: 700; }
+h3 { font-size: var(--font-size-h3); font-weight: 700; }
+
+/* 콘텐츠 최대 너비 컨테이너 */
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--spacing-xl);
+}

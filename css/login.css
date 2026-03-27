@@ -1,0 +1,128 @@
+/* =====================
+   로그인 페이지 스타일
+   ===================== */
+
+.login-main {
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-2xl) var(--spacing-xl);
+  background-color: var(--gray-50);
+}
+
+/* 로그인 박스 */
+.login-box {
+  width: 100%;
+  max-width: 480px;
+  background-color: #ffffff;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--gray-200);
+  padding: var(--spacing-2xl) var(--spacing-xl);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+}
+
+/* 로고 */
+.login-logo {
+  display: flex;
+  justify-content: center;
+  margin-bottom: var(--spacing-xl);
+}
+
+.login-logo img {
+  height: 36px;
+  width: auto;
+}
+
+/* 탭 */
+.login-tabs {
+  display: flex;
+  border-bottom: 2px solid var(--gray-200);
+  margin-bottom: var(--spacing-xl);
+}
+
+.login-tab {
+  flex: 1;
+  padding: var(--spacing-md) 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--gray-400);
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.login-tab--active {
+  color: var(--color-primary);
+  border-bottom-color: var(--color-primary);
+}
+
+/* 패널 */
+.login-panel {
+  display: none;
+}
+
+.login-panel--active {
+  display: block;
+}
+
+/* 에러 메시지 */
+.login-error {
+  display: none;
+  background-color: #fff0f0;
+  border: 1px solid #ffcccc;
+  color: #cc0000;
+  font-size: 14px;
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--radius-sm);
+  margin-bottom: var(--spacing-md);
+}
+
+/* 입력 필드 */
+.login-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+  margin-bottom: var(--spacing-md);
+}
+
+.login-field label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--gray-700);
+}
+
+.login-field input {
+  height: 44px;
+  padding: 0 var(--spacing-md);
+  border: 1px solid var(--gray-300);
+  border-radius: var(--radius-sm);
+  font-size: 15px;
+  color: var(--gray-800);
+  transition: border-color 0.2s;
+}
+
+.login-field input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+}
+
+.login-field input::placeholder {
+  color: var(--gray-400);
+}
+
+/* 제출 버튼 */
+.login-submit {
+  width: 100%;
+  height: 48px;
+  font-size: 16px;
+  margin-top: var(--spacing-sm);
+}
+
+/* 로그인된 프로필 버튼 강조 */
+.header__icon-btn--logged-in {
+  color: var(--color-primary);
+}
