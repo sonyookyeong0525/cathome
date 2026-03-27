@@ -193,7 +193,7 @@ const init = async () => {
         submitBtn.textContent = '수정'
         return
       }
-      window.location.href = `post.html?id=${editId}`
+      window.location.href = 'board.html'
 
     } else {
       /* 새 글 등록 */
